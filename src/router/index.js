@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Layout from '@/layout' //Layout为父路由组件，会在所有子路由上显示
 
 Vue.use(VueRouter)
 
@@ -7,7 +8,15 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import('@/views/test')
+    component: Layout,
+    redirect: '/index',
+    children: [
+      {
+        path: 'index',
+        name: 'Index',
+        component: () => import('@/views/index')
+      }
+    ]
   },
 ]
 
