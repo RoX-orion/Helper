@@ -5,15 +5,16 @@ import { Message } from 'element-ui'
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
   // withCredentials: true, // send cookies when cross-domain requests
-  timeout: 5000 // request timeout
+  timeout: 10000 // request timeout
 })
 
 service.interceptors.response.use(
   response => {
-    const res = response
+    const res = response.data
+    console.log(res)
     if (res.code !== 200) {
       Message({
-        message: res.message || 'Error',
+        message: res.msg || 'Error',
         type: 'error',
         duration: 5 * 1000,
         showClose: true,
@@ -26,7 +27,7 @@ service.interceptors.response.use(
   error => {
     console.log('err' + error) // for debug
     Message({
-      message: error.message,
+      message: error.msg,
       type: 'error',
       duration: 5 * 1000
     })

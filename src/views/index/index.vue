@@ -3,16 +3,16 @@
     <el-row type="flex" justify="center" class="main">
       <el-col :lg="16" :xs="24">
         <el-card>
-          <el-input v-model="keyWords" placeholder="请输入要查询的内容" class="input">
-            <el-button slot="append" icon="el-icon-search" type="primary" @click="analyze">查询</el-button>
+          <el-input v-model="content" placeholder="请输入要查询的内容" class="input">
+            <el-button slot="append" icon="el-icon-search" type="primary" @click.native="analyzee">查询</el-button>
           </el-input>
           
           <el-row :gutter="30">
-            <el-col :lg="12" :md="12" :sm="12" :xs="24">
-              <el-input class="result" type="textarea" v-model="result" :readonly="readonly" :rows="10"></el-input>
+            <el-col :lg="8" :md="12" :sm="12" :xs="24">
+              <explain/>
             </el-col>
-            <el-col :lg="12" :md="12" :sm="12" :xs="24">
-              <el-input type="textarea" v-model="result" :rows="10"></el-input>
+            <el-col :lg="16" :md="12" :sm="12" :xs="24">
+              <el-input class="result" type="textarea" v-model="result" :readonly="readonly" autosize></el-input>
             </el-col>
           </el-row>
         </el-card>
@@ -24,21 +24,34 @@
 
 <script>
 import { analyze } from '@/api/analyze'
+import Explain from './components/explain'
 
 export default {
+  components: {
+    Explain
+  },
   data() {
     return {
       readonly: true,
-      keyWords: '',
-      result: '15ascnjkL15ascnjkL15ascnjkL15ascnjkL15ascnjkL15ascnjkL15ascnjkL15ascnjkL15ascnjkL15ascnjkL15ascnjkL15ascnjkL15ascnjkL15ascnjkL15ascnjkL15ascnjkL15ascnjkL15ascnjkL15ascnjkL15ascnjkL15ascnjkL15ascnjkL15ascnjkL15ascnjkL15ascnjkL15ascnjkL15ascnjkL15ascnjkL15ascnjkL15ascnjkL15ascnjkL15ascnjkL',
+      content: '',
+      result: '',
     }
   },
   methods: {
-    analyze() {
-      const keyWords = this.keyWords
-      this.analyze({keyWords}).then(response => {
-        
-      })      
+    analyzee() {
+      const content = this.content
+      analyze({ content }).then(response => {
+        const {code, data} = response.code
+        if(code == 200){
+          this.$message({
+            message: '解析成功',
+            showClose: true,
+            center: true,
+            type: 'success'
+          })
+         
+        }
+      })  
     }
   }
 }
