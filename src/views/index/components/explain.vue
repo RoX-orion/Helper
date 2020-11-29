@@ -8,12 +8,13 @@
 </template>
 
 <script>
+
 export default {
   name: 'Explain',
   data() {
     return{
-      colors: ['#1844EC', '#C7EC18', '#EE0808', '#3AFF09', '#E97223'],
-      labels: ['生物相关词汇', '普通名词', '动物名', '植物名', '疾病']    
+      colors: ['#1844EC', '#14AAE1', '#EE0808', '#3AFF09', '#FFFF33', '#FFCCFF', '#FFCC00', '#9933FF', '#CC99FF', '#FFCC99', '#CC9933', '#66FFFF'],
+      labels: ['生物相关词汇', '普通名词', '动物名', '植物名', '疾病', '食品', '药品', '化学名', '人名', '地名', '机构团体', '其他专名']    
     }
   }
 }

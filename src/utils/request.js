@@ -11,8 +11,7 @@ const service = axios.create({
 service.interceptors.response.use(
   response => {
     const res = response.data
-    console.log(res)
-    if (res.code !== 200) {
+    if (res.code != 200) {
       Message({
         message: res.msg || 'Error',
         type: 'error',
